@@ -1,0 +1,25 @@
+{
+    "name": "todstoychev/calendar-events",
+    "description": "Full calendar events module for Laravel",
+    "require": {
+        "php": ">=5.5",
+        "todstoychev/websafe-colors": "dev-master",
+        "todstoychev/case-convertor": "dev-master"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "5.*"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Todor Todorov",
+            "email": "todstoychev@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Todstoychev\\CalendarEvents\\": "src/",
+            "Todstoychev\\CalendarEvents\\Tests\\": "tests/"
+        }
+    }
+}
