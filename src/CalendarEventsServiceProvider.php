@@ -1,6 +1,6 @@
 <?php
 
-namespace Todstoychev\Calendar;
+namespace Todstoychev\CalendarEvents;
 
 use Illuminate\Support\ServiceProvider;
 
