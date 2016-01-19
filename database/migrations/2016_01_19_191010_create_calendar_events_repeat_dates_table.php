@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCalendarEventsRepeatDatesTable extends Migration
+class CreateRepeatDatesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -15,7 +15,7 @@ class CreateCalendarEventsRepeatDatesTable extends Migration
         Schema::create('repeat_dates', function (Blueprint $table) {
             $table->increments('id');
             $table->date('repeat_date');
-            $table->integer('calendar_event_id');
+            $table->integer('calendar_event_id')->unsigned();
             $table->foreign('calendar_event_id')
                 ->references('id')
                 ->on('calendar_events')
