@@ -19,14 +19,16 @@ class CalendarEventsServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->loadTranslationsFrom(__DIR__ . '/../resources/lang/', 'calendar');
+        $this->loadTranslationsFrom(__DIR__ . '/../resources/lang/', 'calendar-events');
 
-        $this->loadViewsFrom(__DIR__ . '/../resources/views/', 'calendar');
+        $this->loadViewsFrom(__DIR__ . '/../resources/views/', 'calendar-events');
 
         $this->publishes(
             [
                 __DIR__ . '/../database/migrations/' => database_path('migrations/'),
-                __DIR__ . '/../config/' => config_path('calendar/'),
+                __DIR__ . '/../config/' => config_path('calendar-events/'),
+                __DIR__ . '/../resources/lang/' =>base_path('resources/lang/'),
+                __DIR__ . '/../resources/views/' => base_path('resources/vendor/calendar-events/'),
             ]
         );
     }
@@ -39,7 +41,7 @@ class CalendarEventsServiceProvider extends ServiceProvider
     public function register()
     {
         $this->mergeConfigFrom(
-            __DIR__ . '/../config/config.php', 'calendar'
+            __DIR__ . '/../config/config.php', 'calendar-events'
         );
     }
 }
