@@ -18,11 +18,6 @@ class CalendarEvent extends Model
     protected $table = 'calendar_events';
 
     /**
-     * @var bool
-     */
-    public $timestamps = false;
-
-    /**
      * @var array
      */
     protected $fillable = [
@@ -41,8 +36,8 @@ class CalendarEvent extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function calendarEventDates()
+    public function repeatDates()
     {
-        return $this->hasMany('\Todstoychev\CalendarEvents\Models\CalendarEventDate', 'calendar_event_id', 'id');
+        return $this->hasMany('\Todstoychev\CalendarEvents\Models\RepeatDates', 'calendar_event_id', 'id');
     }
 }

@@ -2,37 +2,30 @@
 
 namespace Todstoychev\CalendarEvents\Models;
 
+use Illuminate\Database\Eloquent\Model;
+
 /**
- * Calendar events dates
+ * RepeatDates model
  *
  * @package Todstoychev\CalendarEvents\Models
  * @author Todor Todorov <todstoychev@gmail.com>
  */
-class CalendarEventDate
+class RepeatDate extends Model
 {
     /**
      * @var string
      */
-    protected $table = 'calendar_events_dates';
+    protected $table = 'repeat_dates';
 
     /**
      * @var bool
      */
-    public $timestamps = true;
+    public $timestamps = false;
 
     /**
-     * @var array
-     */
-    protected $fillable = [
-        'start',
-        'end',
-        'all_day'
-    ];
-
-    /**
-     * CalendarEvent relation
+     * CalendarEvents relation
      *
-     * @return CalendarEvent
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function calendarEvent()
     {
