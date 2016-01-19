@@ -29,6 +29,7 @@ class CalendarEventsServiceProvider extends ServiceProvider
                 __DIR__ . '/../config/' => config_path('calendar-events/'),
                 __DIR__ . '/../resources/lang/' =>base_path('resources/lang/'),
                 __DIR__ . '/../resources/views/' => base_path('resources/vendor/calendar-events/'),
+                __DIR__ . '/../public/js/' => public_path('/js/'),
             ]
         );
     }
