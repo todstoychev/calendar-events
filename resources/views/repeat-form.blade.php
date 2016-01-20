@@ -11,7 +11,7 @@
 
 {{-- Select days to repeat on --}}
 <label for="weekdays">
-    <input type="checkbox" name="weekdays" id="weekdays" />
+    <input type="checkbox" name="weekdays" id="weekdays" onchange="CalendarEvents.repeatOnWeekdaysToggle();" />
     {!! trans('calendar-events::calendar-events.repeat_on_weekdays') !!}
 </label>
 <br />
@@ -56,7 +56,7 @@
 
 {{-- Exclude dates checkbox --}}
 <label for="exclude-dates">
-    <input type="checkbox" name="exclude_dates" id="exclude-dates" />
+    <input type="checkbox" name="exclude_dates" id="exclude-dates" onchange="CalendarEvents.excludeDatesToggle();" />
     {!! trans('calendar-events::calendar-events.exclude_dates') !!}
 </label>
 <br />
@@ -68,7 +68,7 @@
 
 {{-- Include dates checkbox --}}
 <label for="include-dates">
-    <input type="checkbox" name="include_dates" id="include-dates" />
+    <input type="checkbox" name="include_dates" id="include-dates" onchange="CalendarEvents.includeDatesToggle();" />
     {!! trans('calendar-events::calendar-events.include_dates') !!}
 </label>
 <br />

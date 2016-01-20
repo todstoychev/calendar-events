@@ -1,4 +1,4 @@
-<form action="" method="post" xmlns="http://www.w3.org/1999/html">
+<form action="{{ $action }}" method="post" xmlns="http://www.w3.org/1999/html">
     <input type="hidden" name="_token" value="{{ csrf_token() }}" />
 
     {{-- Title field --}}
@@ -14,7 +14,7 @@
 
     {{-- All day check box --}}
     <label for="all-day">
-        <input type="checkbox" name="all_day" value="true" id="all-day" />
+        <input type="checkbox" name="all_day" value="true" id="all-day" onchange="CalendarEvents.allDayToggle();" />
         {!! trans('calendar-events::calendar-events.all_day') !!}
     </label>
     <br />
@@ -93,7 +93,7 @@
 
     {{-- Reapeat event checkbox --}}
     <label for="repeat">
-        <input type="checkbox" name="repeat" id="repeat" />
+        <input type="checkbox" name="repeat" id="repeat" onchange="CalendarEvents.repeatEventToggle();" />
         {!! trans('calendar-events::calendar-events.repeat_event') !!}
     </label>
     <br />

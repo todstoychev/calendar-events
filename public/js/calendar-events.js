@@ -65,26 +65,21 @@ var CalendarEvents = {
         } else {
             $('#include-dates-block').hide();
         }
+    },
+
+    /**
+     * Adds exclude date field
+     */
+    addExcludeDateField: function () {
+        var field = $('button#add-exclude-date-field').siblings('div.exclude-date-field').first().html();
+        $('button#add-exclude-date-field').before('<div class="exclude-date-field">' + field + '</div>');
+    },
+
+    /**
+     * Add include date field
+     */
+    addIncludeDateField: function () {
+        var field = $('button#add-include-date-field').siblings('div.include-date-field').first().html();
+        $('button#add-include-date-field').before('<div class="include-date-field">' + field + '</div>');
     }
 }
-
-// Listen for events
-$('input#all-day').on('change', function () {
-    CalendarEvents.allDayToggle();
-});
-
-$('input#repeat').on('change', function () {
-    CalendarEvents.repeatEventToggle();
-});
-
-$('input#weekdays').on('change', function () {
-    CalendarEvents.repeatOnWeekdaysToggle();
-});
-
-$('input#exclude-dates').on('change', function () {
-    CalendarEvents.excludeDatesToggle();
-});
-
-$('input#include-dates').on('change', function () {
-    CalendarEvents.includeDatesToggle();
-});
