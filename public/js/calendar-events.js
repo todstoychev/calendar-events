@@ -5,9 +5,6 @@ var CalendarEvents = {
     init: function () {
         this.allDayToggle();
         this.repeatEventToggle();
-        this.repeatOnWeekdaysToggle();
-        this.excludeDatesToggle();
-        this.includeDatesToggle();
     },
 
     /**
@@ -35,51 +32,18 @@ var CalendarEvents = {
     },
 
     /**
-     * Repeat on certain weekdays toggle
-     */
-    repeatOnWeekdaysToggle: function () {
-        if ($('#weekdays').prop('checked')) {
-            $('#repeat-at').show();
-        } else {
-            $('#repeat-at').hide();
-        }
-    },
-
-    /**
-     * Exclude dates blovk toggle
-     */
-    excludeDatesToggle: function () {
-        if ($('#exclude-dates').prop('checked')) {
-            $('#exclude-dates-block').show();
-        } else {
-            $('#exclude-dates-block').hide();
-        }
-    },
-
-    /**
-     * Include dates toggle
-     */
-    includeDatesToggle: function () {
-        if ($('#include-dates').prop('checked')) {
-            $('#include-dates-block').show();
-        } else {
-            $('#include-dates-block').hide();
-        }
-    },
-
-    /**
-     * Adds exclude date field
-     */
-    addExcludeDateField: function () {
-        var field = $('button#add-exclude-date-field').siblings('div.exclude-date-field').first().html();
-        $('button#add-exclude-date-field').before('<div class="exclude-date-field">' + field + '</div>');
-    },
-
-    /**
      * Add include date field
      */
-    addIncludeDateField: function () {
-        var field = $('button#add-include-date-field').siblings('div.include-date-field').first().html();
-        $('button#add-include-date-field').before('<div class="include-date-field">' + field + '</div>');
+    addRepeatDateField: function () {
+        var field = $('button#add-repeat-date-field').siblings('div.repeat-date-field').first().html();
+        $('button#add-repeat-date-field').before('<div class="repeat-date-field">' + field + '</div>');
     }
 }
+
+$(document).ready(function () {
+    $(document).on('click', 'button.remove-field', function () {
+        if ($('button.remove-field').length > 1) {
+            $(this).parent().remove();
+        }
+    });
+});

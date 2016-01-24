@@ -14,12 +14,12 @@ class CreateRepeatDatesTable extends Migration
     {
         Schema::create('repeat_dates', function (Blueprint $table) {
             $table->increments('id');
-            $table->date('repeat_date');
-            $table->integer('calendar_event_id')->unsigned();
+            $table->dateTime('date');
+            $table->integer('calendar_event_id');
             $table->foreign('calendar_event_id')
-                ->references('id')
-                ->on('calendar_events')
-                ->onDelete('cascade');
+                    ->references('id')
+                    ->on('calendar_events')
+                    ->onDelete('cascade');
         });
     }
 
@@ -30,6 +30,6 @@ class CreateRepeatDatesTable extends Migration
      */
     public function down()
     {
-        Schema::drop('calendar_events_repeat_dates');
+        Schema::drop('repeat_dates');
     }
 }

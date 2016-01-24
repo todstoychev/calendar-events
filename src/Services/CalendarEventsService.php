@@ -10,16 +10,22 @@ use Todstoychev\CalendarEvents\Models\CalendarEvent;
  * @package Todstoychev\CalendarEvents\Services
  * @author Todor Todorov <todstoychev@gmail.com>
  */
-class CalendarEvents
+class CalendarEventsService
 {
     /**
      * @var CalendarEvent
      */
     protected $calendarEvent;
 
-    public function __construct(CalendarEvent $calendarEvent)
+    /**
+     * @var array
+     */
+    protected $data;
+
+    public function __construct(CalendarEvent $calendarEvent, array $data)
     {
         $this->setCalendarEvent($calendarEvent);
+        $this->setData($data);
     }
 
     /**
@@ -38,6 +44,26 @@ class CalendarEvents
     public function setCalendarEvent(CalendarEvent $calendarEvent)
     {
         $this->calendarEvent = $calendarEvent;
+
+        return $this;
+    }
+
+    /**
+     * @return array
+     */
+    public function getData()
+    {
+        return $this->data;
+    }
+
+    /**
+     * @param array $data
+     *
+     * @return CalendarEventsService
+     */
+    public function setData(array $data)
+    {
+        $this->data = $data;
 
         return $this;
     }
@@ -63,6 +89,11 @@ class CalendarEvents
     }
 
     public function getEvent()
+    {
+
+    }
+
+    protected function validateData()
     {
 
     }

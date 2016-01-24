@@ -69,7 +69,7 @@
 
     {{-- Background color --}}
     <label for="background-color">{!! trans('calendar-events::calendar-events.background_color') !!}</label>
-    <select name="border_color" id="background-color">
+    <select name="background_color" id="background-color">
         <option value="">{!! trans('calendar-events::calendar-events.select_color') !!}</option>
         @foreach($colors as $color)
         <option value="#{{ $color }}" style="background-color: #{{ $color }}">
@@ -100,6 +100,8 @@
 
     {{-- Repeat events block --}}
     <div id="repeat-event">
-        @include('calendar-events::repeat-form')
+        @include('calendar-events::repeat-dates')
     </div>
+
+    <input type="submit" value="{!! trans('calendar-events::calendar-events.save') !!}" />
 </form>

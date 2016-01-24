@@ -2,6 +2,7 @@
 
 namespace Todstoychev\CalendarEvents;
 
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\ServiceProvider;
 
 /**
@@ -32,6 +33,9 @@ class CalendarEventsServiceProvider extends ServiceProvider
                 __DIR__ . '/../public/js/' => public_path('/js/'),
             ]
         );
+
+        Validator::extend('time', '\Todstoychev\CalendarEvents\Validator\CalendarEventsValidator@validateTime');
+        Validator::extend('dates_array', '\Todstoychev\CalendarEvents\Validator\CalendarEventsValidator@validateDatesArray');
     }
 
     /**
