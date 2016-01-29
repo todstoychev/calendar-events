@@ -44,34 +44,8 @@ class CalendarEventRequest extends Request
             $rules['end.time'] = 'required|time';
         }
 
-        if (!empty($this->input('repeat_event'))) {
-            $rules['repeat_type'] = 'required|alpha_num';
-            $rules['stop_repeat_at'] = 'date';
-            $rules['repeat_times'] = 'numeric';
-
-            if ($this->input('repeat_end') == 'date') {
-                $rules['stop_repeat'] = 'required|date';
-            }
-
-            if ($this->input('repeat_end') == 'times') {
-                $rules['stop_repeat'] = 'required|numeric';
-            }
-        }
-
-        if (!empty($this->input('toggle_exclude_dates'))) {
-            $rules['exclude_dates'] = 'dates_array';
-        }
-
-        if (!empty($this->input('toggle_include_dates'))) {
-            $rules['include_dates'] = 'dates_array';
-        }
-
-        if (!empty($this->input('stop_repeat_at'))) {
-            $rules['repeat_times'] = 'required|numeric';
-        }
-
-        if (!empty($this->input('repeat_times'))) {
-            $rules['stop_repeat_at'] = 'required|date';
+        if (!empty($this->input('repeat'))) {
+            $rules['repeat_dates'] = 'dates_array';
         }
 
         return $rules;
