@@ -2,5 +2,5 @@
 
 return [
     // Cache expire in minutes
-    'cache_expire' => 10,
+    'cache_ttl' => 10,
 ];

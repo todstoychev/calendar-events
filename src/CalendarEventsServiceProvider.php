@@ -3,6 +3,8 @@
 namespace Todstoychev\CalendarEvents;
 
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\ServiceProvider;
 use Todstoychev\CalendarEvents\Engine\CalendarEventsEngine;
@@ -70,7 +72,8 @@ class CalendarEventsServiceProvider extends ServiceProvider
                 new CalendarEventsService(
                     $this->app->make('calendar_events_engine'),
                     new Models\CalendarEvent(),
-                    new Models\CalendarEventDate()
+                    new Models\CalendarEventDate(),
+                    new Cache()
                 );
             }
         );
