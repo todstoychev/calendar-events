@@ -61,7 +61,7 @@ class CalendarEventsEngine
         $eventLength = $this->calculateEventLength($data);
         $allDay = array_key_exists('all_day', $data) ? true : false;
         $eventStart = $this->carbon->copy()->setTimestamp(strtotime($data['start']['date'] . ' ' . $data['start']['time']));
-        $eventEnds = $eventStart->copy()->addMinutes($eventLength);
+        $eventEnds = $eventStart->copy()->addSeconds($eventLength);
         $dates[] = [
             'start' => $eventStart->toDateTimeString(),
             'end' => $eventEnds->toDateTimeString(),
@@ -76,7 +76,7 @@ class CalendarEventsEngine
             }
 
             $eventStart = $this->carbon->copy()->setTimestamp(strtotime($date . ' ' . $data['start']['time']));
-            $eventEnds = $eventStart->copy()->addMinutes($eventLength);
+            $eventEnds = $eventStart->copy()->addSeconds($eventLength);
             $dates[] = [
                 'start' => $eventStart->toDateTimeString(),
                 'end' => $eventEnds->toDateTimeString(),
@@ -104,6 +104,6 @@ class CalendarEventsEngine
             $end = $this->carbon->copy()->setTimestamp(strtotime($data['start']['date'] . ' ' . $data['end']['time']));
         }
 
-        return $start->diffInMinutes($end);
+        return $start->diffInSeconds($end);
     }
 }
