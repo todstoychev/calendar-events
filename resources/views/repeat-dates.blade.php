@@ -1,6 +1,6 @@
 <label for="repeat-dates">{!! trans('calendar-events::calendar-events.repeat_dates') !!}</label>
 @if(isset($calendarEvent) && $calendarEvent->calendarEventRepeatDates()->count() > 0)
-    @foreach($calendarEvent->calendarEventRepeatDates() as $eventDate)
+    @foreach($calendarEvent->calendarEventRepeatDates()->get() as $eventDate)
         <div class="repeat-date-field">
             <input
                     type="text"
