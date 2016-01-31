@@ -23,6 +23,9 @@ class CalendarEvent extends Model
     protected $fillable = [
         'title',
         'description',
+        'start',
+        'end',
+        'all_day',
         'border_color',
         'background_color',
         'text_color'

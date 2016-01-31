@@ -10,12 +10,12 @@ use Illuminate\Database\Eloquent\Model;
  * @package Todstoychev\CalendarEvents\Models
  * @author Todor Todorov <todstoychev@gmail.com>
  */
-class CalendarEventDate extends Model
+class CalendarEventRepeatDate extends Model
 {
     /**
      * @var string
      */
-    protected $table = 'calendar_events_dates';
+    protected $table = 'calendar_events_repeat_dates';
 
     /**
      * @var bool
