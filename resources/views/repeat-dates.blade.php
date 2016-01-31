@@ -1,13 +1,13 @@
 <label for="repeat-dates">{!! trans('calendar-events::calendar-events.repeat_dates') !!}</label>
-@if(isset($calendarEvent) && $calendarEvent->calendarEventDates()->count() > 0)
-    @foreach($calendarEvent->calendarEventDates() as $eventDate)
+@if(isset($calendarEvent) && $calendarEvent->calendarEventRepeatDates()->count() > 0)
+    @foreach($calendarEvent->calendarEventRepeatDates() as $eventDate)
         <div class="repeat-date-field">
             <input
                     type="text"
                     name="repeat_dates[]"
                     placeholder="{!! trans('calendar-events::calendar-events.date') !!}"
                     id="repeat-dates"
-                    value="{{ strtotime('Y-m-d', $eventDate->start) }}"
+                    value="{{ date('Y-m-d', strtotime($eventDate->start)) }}"
             />
             <button type="button" class="remove-field" onclick="CalendarEvents.removeField();">
                 {!! trans('calendar-events::calendar-events.remove_field') !!}

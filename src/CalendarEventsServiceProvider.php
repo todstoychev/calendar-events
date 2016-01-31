@@ -72,7 +72,7 @@ class CalendarEventsServiceProvider extends ServiceProvider
                 new CalendarEventsService(
                     $this->app->make('calendar_events_engine'),
                     new Models\CalendarEvent(),
-                    new Models\CalendarEventDate(),
+                    new Models\CalendarEventRepeatDate(),
                     new Cache()
                 );
             }

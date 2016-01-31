@@ -46,7 +46,7 @@
             name="start[date]"
             placeholder="{!! trans('calendar-events::calendar-events.date') !!}"
             id="start"
-            value="{{ isset($calendarEvent) ? strtotime('Y-m-d', $calendarEvent->start) : null }}"
+            value="{{ isset($calendarEvent) ? date('Y-m-d', strtotime($calendarEvent->start)) : null }}"
     />
     -
     <input
@@ -54,7 +54,7 @@
             name="start[time]"
             placeholder="{!! trans('calendar-events::calendar-events.time') !!}"
             id="start-time"
-            value="{{ isset($calendarEvent) ? strtotime('H:i:s', $calendarEvent->start) : null }}"
+            value="{{ isset($calendarEvent) ? date('H:i:s', strtotime($calendarEvent->start)) : null }}"
     />
     <br />
 
@@ -134,7 +134,7 @@
                 name="repeat"
                 id="repeat"
                 onchange="CalendarEvents.repeatEventToggle();"
-                {{ (isset($calendarEvent) && $calendarEvent->calendarEventDates()->count() > 0) ? 'checked=\"\"' : null }}
+                {{ (isset($calendarEvent) && $calendarEvent->calendarEventRepeatDates()->count() > 0) ? 'checked=\"\"' : null }}
         />
         {!! trans('calendar-events::calendar-events.repeat_event') !!}
     </label>

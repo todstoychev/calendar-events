@@ -25,9 +25,9 @@ class CalendarEventsService
     protected $calendarEvent;
 
     /**
-     * @var Models\CalendarEventDate
+     * @var Models\CalendarEventRepeatDate
      */
-    protected $calendarEventDate;
+    protected $calendarEventRepeatDate;
 
     /**
      * @var Cache
@@ -54,20 +54,20 @@ class CalendarEventsService
      *
      * @param CalendarEventsEngine $calendarEventsEngine
      * @param Models\CalendarEvent $calendarEvent
-     * @param Models\CalendarEventDate $calendarEventDate
+     * @param Models\CalendarEventRepeatDate $calendarEventRepeatDate
      * @param Cache $cache
      * @param int $cacheTimeToLive
      */
     public function __construct(
         CalendarEventsEngine $calendarEventsEngine,
         Models\CalendarEvent $calendarEvent,
-        Models\CalendarEventDate $calendarEventDate,
+        Models\CalendarEventRepeatDate $calendarEventRepeatDate,
         Cache $cache,
         $cacheTimeToLive = 10
     ) {
         $this->calendarEventsEngine = $calendarEventsEngine;
         $this->calendarEvent = $calendarEvent;
-        $this->calendarEventDate = $calendarEventDate;
+        $this->calendarEventRepeatDate = $calendarEventRepeatDate;
         $this->cache = $cache;
         $this->cacheTimeToLive = $cacheTimeToLive;
     }
@@ -99,13 +99,12 @@ class CalendarEventsService
         $calendarEvent = $this->calendarEvent->create($eventData);
 
         foreach ($eventDates as $date) {
-            $calendarEventDate = clone $this->calendarEventDate;
-            $calendarEventDate->start = $date['start'];
-            $calendarEventDate->end = $date['end'];
-            $calendarEventDate->all_day = $date['all_day'];
-            $calendarEventDate->calendarEvent()->associate($calendarEvent);
-            $calendarEventDate->save();
-            unset($calendarEventDate);
+            $calendarEventRepeatDate = clone $this->calendarEventRepeatDate;
+            $calendarEventRepeatDate->start = $date['start'];
+            $calendarEventRepeatDate->end = $date['end'];
+            $calendarEventRepeatDate->calendarEvent()->associate($calendarEvent);
+            $calendarEventRepeatDate->save();
+            unset($calendarEventRepeatDate);
         }
 
         $cache::put(self::CACHE_KEY . $calendarEvent->id, $calendarEvent, $this->cacheTimeToLive);
@@ -135,7 +134,7 @@ class CalendarEventsService
         }
 
         $calendarEvent = $this->calendarEvent
-            ->with('calendarEventDates')
+            ->with('calendarEventRepeatDates')
             ->where('id', $id)
             ->firstOrFail();
 
@@ -159,7 +158,7 @@ class CalendarEventsService
         }
 
         $allEvents = $this->calendarEvent
-            ->with('calendarEventDates')
+            ->with('calendarEventRepeatDates')
             ->get();
 
         $calendarEvents = [];
@@ -206,7 +205,7 @@ class CalendarEventsService
         $eventData = $this->calendarEventsEngine->buildEventData($data);
         $eventDates = $this->calendarEventsEngine->buildEventDates($data);
         $cache = $this->cache;
-        $this->calendarEventDate
+        $this->calendarEventRepeatDate
             ->where('calendar_event_id', $id)
             ->delete();
         $calendarEvent = $this->calendarEvent
@@ -215,13 +214,12 @@ class CalendarEventsService
             ->save();
 
         foreach ($eventDates as $date) {
-            $calendarEventDate = clone $this->calendarEventDate;
-            $calendarEventDate->start = $date['start'];
-            $calendarEventDate->end = $date['end'];
-            $calendarEventDate->all_day = $date['all_day'];
-            $calendarEventDate->calendarEvent()->associate($calendarEvent);
-            $calendarEventDate->save();
-            unset($calendarEventDate);
+            $calendarEventRepeatDate = clone $this->calendarEventRepeatDate;
+            $calendarEventRepeatDate->start = $date['start'];
+            $calendarEventRepeatDate->end = $date['end'];
+            $calendarEventRepeatDate->calendarEvent()->associate($calendarEvent);
+            $calendarEventRepeatDate->save();
+            unset($calendarEventRepeatDate);
         }
 
         $cache::put(self::CACHE_KEY . $calendarEvent->id, $calendarEvent, $this->cacheTimeToLive);

@@ -36,8 +36,8 @@ class CalendarEvent extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function calendarEventDates()
+    public function calendarEventRepeatDates()
     {
-        return $this->hasMany('\Todstoychev\CalendarEvents\Models\CalendarEventDate');
+        return $this->hasMany('\Todstoychev\CalendarEvents\Models\CalendarEventRepeatDate');
     }
 }

@@ -37,9 +37,21 @@ class CalendarEventsEngine
      */
     public function buildEventData(array $data)
     {
+        $start = strtotime($data['start']['date'] . ' ' . $data['start']['time']);
+        $start = date('Y-m-d H:i:s', $start);
+        $end = null;
+
+        if (array_key_exists('end', $data)) {
+            $end = strtotime($data['end']['date'] . ' ' . $data['end']['time']);
+            $end = date('Y-m-d H:i:s', $end);
+        }
+
         $event = [
             'title' => $data['title'],
             'description' => $data['description'],
+            'start' => $start,
+            'end' => $end,
+            'all_day' => array_key_exists('all_day', $data),
             'border_color' => $data['border_color'],
             'background_color' => $data['background_color'],
             'text_color' => $data['text_color'],
@@ -59,28 +71,20 @@ class CalendarEventsEngine
     {
         $dates = [];
         $eventLength = $this->calculateEventLength($data);
-        $allDay = array_key_exists('all_day', $data) ? true : false;
-        $eventStart = $this->carbon->copy()->setTimestamp(strtotime($data['start']['date'] . ' ' . $data['start']['time']));
-        $eventEnds = $eventStart->copy()->addSeconds($eventLength);
-        $dates[] = [
-            'start' => $eventStart->toDateTimeString(),
-            'end' => $eventEnds->toDateTimeString(),
-            'all_day' => $allDay,
-        ];
+        $allDay = array_key_exists('all_day', $data);
 
         foreach ($data['repeat_dates'] as $date) {
-            $date = date('Y-m-d', strtotime($date));
+            $date = strtotime($date . ' ' . $data['start']['time']);
 
             if (false === $date) {
                 throw new InvalidDateStringException('Invalid date string!');
             }
 
-            $eventStart = $this->carbon->copy()->setTimestamp(strtotime($date . ' ' . $data['start']['time']));
-            $eventEnds = $eventStart->copy()->addSeconds($eventLength);
+            $eventStart = $this->carbon->copy()->setTimestamp($date);
+            $eventEnds = $allDay ? $eventStart->copy()->addSeconds($eventLength) : null;
             $dates[] = [
                 'start' => $eventStart->toDateTimeString(),
-                'end' => $eventEnds->toDateTimeString(),
-                'all_day' => $allDay,
+                'end' => (null !== $eventEnds) ? $eventEnds->toDateTimeString() : null,
             ];
         }
 
@@ -88,7 +92,7 @@ class CalendarEventsEngine
     }
 
     /**
-     * Calculate event length in minutes
+     * Calculate event length in seconds
      *
      * @param array $data
      *
