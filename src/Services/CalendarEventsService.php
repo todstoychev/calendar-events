@@ -205,14 +205,17 @@ class CalendarEventsService
         $eventData = $this->calendarEventsEngine->buildEventData($data);
         $eventDates = $this->calendarEventsEngine->buildEventDates($data);
         $cache = $this->cache;
-        $this->calendarEventRepeatDate
+        $calendarEventRepeatDate = clone $this->calendarEventRepeatDate;
+        $calendarEventRepeatDate
             ->where('calendar_event_id', $id)
             ->delete();
+        $this->calendarEvent
+            ->where('id', $id)
+            ->update($eventData);
         $calendarEvent = $this->calendarEvent
             ->where('id', $id)
-            ->update($eventData)
-            ->save();
-
+            ->firstOrFail();
+        
         foreach ($eventDates as $date) {
             $calendarEventRepeatDate = clone $this->calendarEventRepeatDate;
             $calendarEventRepeatDate->start = $date['start'];

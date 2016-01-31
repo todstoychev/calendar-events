@@ -3,10 +3,8 @@ var CalendarEvents = {
      * The init method. Sets the states of the blocks.
      */
     init: function () {
-        $(document).ready(function () {
-            this.allDayToggle();
-            this.repeatEventToggle();
-        });
+        this.allDayToggle();
+        this.repeatEventToggle();
     },
 
     /**

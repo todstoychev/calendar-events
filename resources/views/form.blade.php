@@ -1,5 +1,6 @@
 @if(isset($calendarEvent))
-    <form action="{{ $action }}" method="PUT">
+    <form action="{{ $action }}" method="POST">
+        <input type="hidden" name="_method" value="PUT" />
 @else
     <form action="{{ $action }}" method="POST">
 @endif
@@ -33,7 +34,7 @@
                 name="all_day"
                 value="true"
                 id="all-day" onchange="CalendarEvents.allDayToggle();"
-                {{ (isset($calendarEvent) && true === $calendarEvent->all_day) ? 'checked=\"\"' : null }}
+                {{ (isset($calendarEvent) && true == $calendarEvent->all_day) ? 'checked=\"\"' : null }}
         />
         {!! trans('calendar-events::calendar-events.all_day') !!}
     </label>
@@ -65,7 +66,7 @@
             name="end[date]"
             placeholder="{!! trans('calendar-events::calendar-events.end') !!}"
             id="end"
-            value="{{ (isset($calendarEvent) && false === $calendarEvent->all_day) ? strtotime('Y-m-d', $calendarEvent->end) : null }}"
+            value="{{ (isset($calendarEvent) && false == $calendarEvent->all_day) ? strtotime('Y-m-d', $calendarEvent->end) : null }}"
     />
     -
     <input
@@ -73,7 +74,7 @@
             name="end[time]"
             placeholder="{!! trans('calendar-events::calendar-events.time') !!}"
             id="end-time"
-            value="{{ (isset($calendarEvent) && false === $calendarEvent->all_day) ? strtotime('H:i:s', $calendarEvent->end) : null }}"
+            value="{{ (isset($calendarEvent) && false == $calendarEvent->all_day) ? strtotime('H:i:s', $calendarEvent->end) : null }}"
     />
     <br />
 
