@@ -3,6 +3,7 @@
 namespace Todstoychev\CalendarEvents\Engine;
 
 use Carbon\Carbon;
+use Illuminate\Support\Collection;
 use Todstoychev\CalendarEvents\Exceptions\InvalidDateStringException;
 
 /**
@@ -74,21 +75,80 @@ class CalendarEventsEngine
         $allDay = array_key_exists('all_day', $data);
 
         foreach ($data['repeat_dates'] as $date) {
-            $date = strtotime($date . ' ' . $data['start']['time']);
+            if (strlen($date) > 0) {
+                $date = strtotime($date . ' ' . $data['start']['time']);
 
-            if (false === $date) {
-                throw new InvalidDateStringException('Invalid date string!');
+                if (false === $date) {
+                    throw new InvalidDateStringException('Invalid date string!');
+                }
+
+                $eventStart = $this->carbon->copy()->setTimestamp($date);
+                $eventEnds = $allDay ? $eventStart->copy()->addSeconds($eventLength) : null;
+                $dates[] = [
+                    'start' => $eventStart->toDateTimeString(),
+                    'end' => (null !== $eventEnds) ? $eventEnds->toDateTimeString() : null,
+                ];
             }
-
-            $eventStart = $this->carbon->copy()->setTimestamp($date);
-            $eventEnds = $allDay ? $eventStart->copy()->addSeconds($eventLength) : null;
-            $dates[] = [
-                'start' => $eventStart->toDateTimeString(),
-                'end' => (null !== $eventEnds) ? $eventEnds->toDateTimeString() : null,
-            ];
         }
 
         return $dates;
+    }
+
+    /**
+     * Creates JSON string from events collection
+     *
+     * @param array $calendarEvents
+     *
+     * @return array
+     */
+    public function formatEventsToJson(array $calendarEvents)
+    {
+        $array = [];
+
+        foreach ($calendarEvents as $event) {
+            $start = $this->carbon
+                ->copy()
+                ->setTimestamp(strtotime($event->start))
+                ->toIso8601String();
+            $end = $this->carbon
+                ->copy()
+                ->setTimestamp(strtotime($event->end))
+                ->toIso8601String();
+            $allDay = $event->all_day == 1;
+
+            $data = [
+                'title' => $event->title,
+                'description' => $event->description,
+                'start' => $start,
+                'end' => $end,
+                'allDay' => $allDay,
+                'borderColor' => $event->border_color,
+                'textColor' => $event->text_color,
+                'backgroundColor' => $event->background_color,
+            ];
+
+            $array[] = $data;
+
+            if ($event->calendarEventRepeatDates()->count() > 0) {
+                foreach ($event->calendarEventRepeatDates()->get() as $repeatDate) {
+                    $start = $this->carbon
+                        ->copy()
+                        ->setTimestamp(strtotime($repeatDate->start))
+                        ->toIso8601String();
+                    $end = $this->carbon
+                        ->copy()
+                        ->setTimestamp(strtotime($repeatDate->end))
+                        ->toIso8601String();
+
+                    $data['start'] = $start;
+                    $data['end'] = $end;
+
+                    $array[] = $data;
+                }
+            }
+        }
+
+        return $array;
     }
 
     /**

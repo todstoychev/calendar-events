@@ -45,6 +45,11 @@ class CalendarEventsService
     const ALL_EVENTS_KEY = 'all_calendar_events';
 
     /**
+     * All calendar events json string cache key
+     */
+    const ALL_EVENTS_TO_JSON_KEY = 'all_calendar_events_json';
+
+    /**
      * @var int
      */
     protected $cacheTimeToLive;
@@ -109,7 +114,7 @@ class CalendarEventsService
 
         $cache::put(self::CACHE_KEY . $calendarEvent->id, $calendarEvent, $this->cacheTimeToLive);
         $allEvents = $this->getAllEvents();
-        $allEvents->put($calendarEvent->id, $calendarEvent);
+        $allEvents[$calendarEvent->id] = $calendarEvent;
         $cache::put(self::ALL_EVENTS_KEY, $allEvents, $this->cacheTimeToLive);
 
         return true;
@@ -173,6 +178,27 @@ class CalendarEventsService
     }
 
     /**
+     * Get all events JSON
+     *
+     * @return string
+     */
+    public function getAllEventsAsJson()
+    {
+        $cache = $this->cache;
+
+        if ($cache::has(self::ALL_EVENTS_TO_JSON_KEY)) {
+            return $cache::get(self::ALL_EVENTS_TO_JSON_KEY);
+        }
+
+        $allEvents = $this->calendarEventsEngine->formatEventsToJson($this->getAllEvents());
+        $allEventsToJson = json_encode($allEvents);
+        $cache::put(self::ALL_EVENTS_TO_JSON_KEY, $allEventsToJson, $this->cacheTimeToLive);
+
+        return $allEventsToJson;
+
+    }
+
+    /**
      * Deletes an calendar event and rebuilds the cache.
      *
      * @param int $id
@@ -215,7 +241,7 @@ class CalendarEventsService
         $calendarEvent = $this->calendarEvent
             ->where('id', $id)
             ->firstOrFail();
-        
+
         foreach ($eventDates as $date) {
             $calendarEventRepeatDate = clone $this->calendarEventRepeatDate;
             $calendarEventRepeatDate->start = $date['start'];
