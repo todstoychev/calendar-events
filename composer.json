@@ -3,7 +3,7 @@
     "description": "Full calendar events module for Laravel",
     "require": {
         "php": ">=5.5.9",
-        "todstoychev/websafe-colors": "dev-master"
+        "todstoychev/websafe-colors": "dev-master",
         "laravel/framework": "5.*"
     },
     "require-dev": {
