@@ -27,7 +27,3 @@ install:
 
 before_script:
     - composer install
-
-script:
-    - php artisan vendor:publish --force
-    - php artisan migrate
