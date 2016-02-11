@@ -1,6 +1,12 @@
 {
     "name": "todstoychev/calendar-events",
     "description": "Full calendar events module for Laravel",
+    "keywords": [
+        "Laravel",
+        "fullcalendar",
+        "events",
+        "calendar"
+    ],
     "require": {
         "php": ">=5.5.9",
         "todstoychev/websafe-colors": "dev-master",
