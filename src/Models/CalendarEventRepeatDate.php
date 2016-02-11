@@ -10,17 +10,23 @@ use Illuminate\Database\Eloquent\Model;
  * @package Todstoychev\CalendarEvents\Models
  * @author Todor Todorov <todstoychev@gmail.com>
  */
-class RepeatDate extends Model
+class CalendarEventRepeatDate extends Model
 {
     /**
      * @var string
      */
-    protected $table = 'repeat_dates';
+    protected $table = 'calendar_events_repeat_dates';
 
     /**
      * @var bool
      */
     public $timestamps = false;
+
+    protected $fillable = [
+        'start',
+        'end',
+        'all_day'
+    ];
 
     /**
      * CalendarEvents relation

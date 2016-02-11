@@ -23,9 +23,9 @@ class CalendarEvent extends Model
     protected $fillable = [
         'title',
         'description',
-        'all_day',
         'start',
         'end',
+        'all_day',
         'border_color',
         'background_color',
         'text_color'
@@ -36,8 +36,8 @@ class CalendarEvent extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function repeatDates()
+    public function calendarEventRepeatDates()
     {
-        return $this->hasMany('\Todstoychev\CalendarEvents\Models\RepeatDates', 'calendar_event_id', 'id');
+        return $this->hasMany('\Todstoychev\CalendarEvents\Models\CalendarEventRepeatDate');
     }
 }
