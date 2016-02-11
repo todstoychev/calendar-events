@@ -4,6 +4,7 @@
     "require": {
         "php": ">=5.5.9",
         "todstoychev/websafe-colors": "dev-master"
+        "laravel\framework": ">5.0"
     },
     "require-dev": {
         "phpunit/phpunit": "5.*"
@@ -17,7 +18,11 @@
     ],
     "autoload": {
         "psr-4": {
-            "Todstoychev\\CalendarEvents\\": "src/",
+            "Todstoychev\\CalendarEvents\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
             "Todstoychev\\CalendarEvents\\Tests\\": "tests/"
         }
     }

@@ -3,7 +3,7 @@
 namespace Todstoychev\CalendarEvents\Engine;
 
 use Carbon\Carbon;
-use Illuminate\Support\Collection;
+use Todstoychev\CalendarEvents\Exceptions\DateDifferenceException;
 use Todstoychev\CalendarEvents\Exceptions\InvalidDateStringException;
 
 /**
@@ -45,6 +45,10 @@ class CalendarEventsEngine
         if (array_key_exists('end', $data)) {
             $end = strtotime($data['end']['date'] . ' ' . $data['end']['time']);
             $end = date('Y-m-d H:i:s', $end);
+
+            if (strtotime($end) < strtotime($start)) {
+                throw new DateDifferenceException('Start date bigger then end date!');
+            }
         }
 
         $event = [
@@ -83,7 +87,7 @@ class CalendarEventsEngine
                 }
 
                 $eventStart = $this->carbon->copy()->setTimestamp($date);
-                $eventEnds = $allDay ? $eventStart->copy()->addSeconds($eventLength) : null;
+                $eventEnds = $allDay ? null : $eventStart->copy()->addSeconds($eventLength);
                 $dates[] = [
                     'start' => $eventStart->toDateTimeString(),
                     'end' => (null !== $eventEnds) ? $eventEnds->toDateTimeString() : null,
