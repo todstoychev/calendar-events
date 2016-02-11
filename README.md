@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/todstoychev/calendar-events.svg?branch=master)](https://travis-ci.org/todstoychev/calendar-events)
+
 Laravel 5 module to integrate a [fullcalendar](http://fullcalendar.io/) javascript plugin. It provides simple way to store events in the database and supports event repeat.
 
 # Installation
