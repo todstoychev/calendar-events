@@ -7,6 +7,8 @@
         "events",
         "calendar"
     ],
+    "homepage": "https://github.com/todstoychev/case-convertor",
+    "license": "MIT",
     "require": {
         "php": ">=5.5.9",
         "todstoychev/websafe-colors": "dev-master",
