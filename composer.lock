@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "df6c7c3ece8cc3f0015ba0769ca5349e",
-    "content-hash": "a22affb6251fb89f557868f65df4b123",
+    "hash": "ccb13d1e461cff869aa350ec81d31838",
+    "content-hash": "c4f6aa83fd7344aa232b7d8e4bad934d",
     "packages": [
         {
             "name": "classpreloader/classpreloader",
@@ -1728,16 +1728,16 @@
         },
         {
             "name": "todstoychev/websafe-colors",
-            "version": "dev-master",
+            "version": "v0.1.3-alpha",
             "source": {
                 "type": "git",
                 "url": "https://github.com/todstoychev/websafe-colors.git",
-                "reference": "c67c1ea202f0a4abba7a0f8b3a66d3f4407b2796"
+                "reference": "15191c300e99002e403844dbb69bfa8d52a51dd5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/todstoychev/websafe-colors/zipball/c67c1ea202f0a4abba7a0f8b3a66d3f4407b2796",
-                "reference": "c67c1ea202f0a4abba7a0f8b3a66d3f4407b2796",
+                "url": "https://api.github.com/repos/todstoychev/websafe-colors/zipball/15191c300e99002e403844dbb69bfa8d52a51dd5",
+                "reference": "15191c300e99002e403844dbb69bfa8d52a51dd5",
                 "shasum": ""
             },
             "require": {
@@ -1760,14 +1760,14 @@
                 }
             ],
             "description": "Web safe colors generator",
-            "homepage": "https://github.com/todstoychev/websafe-colors",
+            "homepage": "https://github.com/todstoychev/wsc",
             "keywords": [
                 "color codes",
                 "generator",
                 "hex",
                 "rgb"
             ],
-            "time": "2016-03-25 20:00:21"
+            "time": "2016-03-25 18:13:51"
         },
         {
             "name": "vlucas/phpdotenv",
@@ -2778,9 +2778,7 @@
     ],
     "aliases": [],
     "minimum-stability": "alpha",
-    "stability-flags": {
-        "todstoychev/websafe-colors": 20
-    },
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
