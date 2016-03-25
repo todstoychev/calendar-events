@@ -1732,12 +1732,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/todstoychev/websafe-colors.git",
-                "reference": "f51c76994afa621bde3d0c79fa7099aea3028405"
+                "reference": "fef656713ef19b39a2ff5ef16c2838b26edecaf1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/todstoychev/websafe-colors/zipball/f51c76994afa621bde3d0c79fa7099aea3028405",
-                "reference": "f51c76994afa621bde3d0c79fa7099aea3028405",
+                "url": "https://api.github.com/repos/todstoychev/websafe-colors/zipball/fef656713ef19b39a2ff5ef16c2838b26edecaf1",
+                "reference": "fef656713ef19b39a2ff5ef16c2838b26edecaf1",
                 "shasum": ""
             },
             "require": {
@@ -1767,7 +1767,7 @@
                 "hex",
                 "rgb"
             ],
-            "time": "2016-03-25 18:18:21"
+            "time": "2016-03-25 19:58:03"
         },
         {
             "name": "vlucas/phpdotenv",
