@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "145f0dbbd8af456b85057af360572875",
-    "content-hash": "0813a7f9748d44cf09404fe5cc7f6e19",
+    "hash": "e2baad048e34a5fd58c8b6690a2fe8aa",
+    "content-hash": "11bee75f4ab794b6d29f33500cb05464",
     "packages": [
         {
             "name": "classpreloader/classpreloader",
@@ -1728,16 +1728,16 @@
         },
         {
             "name": "todstoychev/websafe-colors",
-            "version": "dev-master",
+            "version": "v0.1.3-alpha",
             "source": {
                 "type": "git",
-                "url": "https://github.com/todstoychev/wsc.git",
-                "reference": "f51c76994afa621bde3d0c79fa7099aea3028405"
+                "url": "https://github.com/todstoychev/websafe-colors.git",
+                "reference": "15191c300e99002e403844dbb69bfa8d52a51dd5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/todstoychev/wsc/zipball/f51c76994afa621bde3d0c79fa7099aea3028405",
-                "reference": "f51c76994afa621bde3d0c79fa7099aea3028405",
+                "url": "https://api.github.com/repos/todstoychev/websafe-colors/zipball/15191c300e99002e403844dbb69bfa8d52a51dd5",
+                "reference": "15191c300e99002e403844dbb69bfa8d52a51dd5",
                 "shasum": ""
             },
             "require": {
@@ -1767,7 +1767,7 @@
                 "hex",
                 "rgb"
             ],
-            "time": "2016-03-25 18:18:21"
+            "time": "2016-03-25 18:13:51"
         },
         {
             "name": "vlucas/phpdotenv",
@@ -2779,7 +2779,7 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "todstoychev/websafe-colors": 20
+        "todstoychev/websafe-colors": 15
     },
     "prefer-stable": false,
     "prefer-lowest": false,
