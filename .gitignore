@@ -1,5 +1,4 @@
 composer.phar
 vendor/
-composer.lock
 testdocs/
-/.idea
+.idea/
