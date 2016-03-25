@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "ccb13d1e461cff869aa350ec81d31838",
-    "content-hash": "c4f6aa83fd7344aa232b7d8e4bad934d",
+    "hash": "bd308ea6cba7a1b37e19dd330a54a55c",
+    "content-hash": "97dd290a8277e010b76775872489b7d4",
     "packages": [
         {
             "name": "classpreloader/classpreloader",
@@ -1728,16 +1728,16 @@
         },
         {
             "name": "todstoychev/websafe-colors",
-            "version": "v0.1.3-alpha",
+            "version": "v0.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/todstoychev/websafe-colors.git",
-                "reference": "15191c300e99002e403844dbb69bfa8d52a51dd5"
+                "reference": "3ab5d9307abb1ed6bf9f2d46eca33ebcdc778958"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/todstoychev/websafe-colors/zipball/15191c300e99002e403844dbb69bfa8d52a51dd5",
-                "reference": "15191c300e99002e403844dbb69bfa8d52a51dd5",
+                "url": "https://api.github.com/repos/todstoychev/websafe-colors/zipball/3ab5d9307abb1ed6bf9f2d46eca33ebcdc778958",
+                "reference": "3ab5d9307abb1ed6bf9f2d46eca33ebcdc778958",
                 "shasum": ""
             },
             "require": {
@@ -1760,14 +1760,14 @@
                 }
             ],
             "description": "Web safe colors generator",
-            "homepage": "https://github.com/todstoychev/wsc",
+            "homepage": "https://github.com/todstoychev/websafe-colors",
             "keywords": [
                 "color codes",
                 "generator",
                 "hex",
                 "rgb"
             ],
-            "time": "2016-03-25 18:13:51"
+            "time": "2016-03-25 20:18:50"
         },
         {
             "name": "vlucas/phpdotenv",
@@ -2777,7 +2777,7 @@
         }
     ],
     "aliases": [],
-    "minimum-stability": "alpha",
+    "minimum-stability": "stable",
     "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
