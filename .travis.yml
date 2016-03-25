@@ -24,8 +24,6 @@ cache:
 
 install:
     - composer self-update
-
-before_script:
     - composer install
 
 script: phpunit
