@@ -32,5 +32,6 @@
         "psr-4": {
             "Todstoychev\\CalendarEvents\\Tests\\": "tests/"
         }
-    }
+    },
+    "minimum-stability": "alpha"
 }

@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "93689e126ddc856956ea5461859ed449",
-    "content-hash": "52ed65372f9999b7ada94c5caf861b84",
+    "hash": "df6c7c3ece8cc3f0015ba0769ca5349e",
+    "content-hash": "a22affb6251fb89f557868f65df4b123",
     "packages": [
         {
             "name": "classpreloader/classpreloader",
@@ -1732,12 +1732,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/todstoychev/websafe-colors.git",
-                "reference": "fef656713ef19b39a2ff5ef16c2838b26edecaf1"
+                "reference": "c67c1ea202f0a4abba7a0f8b3a66d3f4407b2796"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/todstoychev/websafe-colors/zipball/fef656713ef19b39a2ff5ef16c2838b26edecaf1",
-                "reference": "fef656713ef19b39a2ff5ef16c2838b26edecaf1",
+                "url": "https://api.github.com/repos/todstoychev/websafe-colors/zipball/c67c1ea202f0a4abba7a0f8b3a66d3f4407b2796",
+                "reference": "c67c1ea202f0a4abba7a0f8b3a66d3f4407b2796",
                 "shasum": ""
             },
             "require": {
@@ -1760,14 +1760,14 @@
                 }
             ],
             "description": "Web safe colors generator",
-            "homepage": "https://github.com/todstoychev/wsc",
+            "homepage": "https://github.com/todstoychev/websafe-colors",
             "keywords": [
                 "color codes",
                 "generator",
                 "hex",
                 "rgb"
             ],
-            "time": "2016-03-25 19:58:03"
+            "time": "2016-03-25 20:00:21"
         },
         {
             "name": "vlucas/phpdotenv",
@@ -2777,7 +2777,7 @@
         }
     ],
     "aliases": [],
-    "minimum-stability": "stable",
+    "minimum-stability": "alpha",
     "stability-flags": {
         "todstoychev/websafe-colors": 20
     },
