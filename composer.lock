@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "4c5c615f8e65a5096562fe79fccbbe20",
-    "content-hash": "eb9026ebe44b0d805b6d162178a8e1d8",
+    "hash": "d721a16bb3d9e0de591728c0f72bf1a9",
+    "content-hash": "70a1ff4241d8bc6055f3c0dc5a01d49d",
     "packages": [
         {
             "name": "classpreloader/classpreloader",
@@ -1732,16 +1732,15 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/todstoychev/wsc.git",
-                "reference": "3518f62db9eb962f689ba11bc911d99a90e5969c"
+                "reference": "f51c76994afa621bde3d0c79fa7099aea3028405"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/todstoychev/wsc/zipball/3518f62db9eb962f689ba11bc911d99a90e5969c",
-                "reference": "3518f62db9eb962f689ba11bc911d99a90e5969c",
+                "url": "https://api.github.com/repos/todstoychev/wsc/zipball/f51c76994afa621bde3d0c79fa7099aea3028405",
+                "reference": "f51c76994afa621bde3d0c79fa7099aea3028405",
                 "shasum": ""
             },
             "require": {
-                "laravel/framework": "5.*",
                 "php": ">=5.4"
             },
             "type": "library",
@@ -1768,7 +1767,7 @@
                 "hex",
                 "rgb"
             ],
-            "time": "2015-12-02 12:00:33"
+            "time": "2016-03-25 18:18:21"
         },
         {
             "name": "vlucas/phpdotenv",
