@@ -35,6 +35,6 @@ class CalendarEventRepeatDate extends Model
      */
     public function calendarEvent()
     {
-        return $this->belongsTo('\Todstoychev\CalendarEvents\Models\CalendarEvent', 'calendar_event_id');
+        return $this->belongsTo(CalendarEvent::class, 'calendar_event_id');
     }
 }

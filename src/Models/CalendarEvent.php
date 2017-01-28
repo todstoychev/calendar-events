@@ -38,6 +38,6 @@ class CalendarEvent extends Model
      */
     public function calendarEventRepeatDates()
     {
-        return $this->hasMany('\Todstoychev\CalendarEvents\Models\CalendarEventRepeatDate');
+        return $this->hasMany(CalendarEventRepeatDate::class);
     }
 }
