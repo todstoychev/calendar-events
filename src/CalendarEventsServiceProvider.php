@@ -4,7 +4,6 @@ namespace Todstoychev\CalendarEvents;
 
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\ServiceProvider;
 use Todstoychev\CalendarEvents\Engine\CalendarEventsEngine;
@@ -28,12 +27,10 @@ class CalendarEventsServiceProvider extends ServiceProvider
     {
         $this->loadTranslationsFrom(__DIR__ . '/../resources/lang/', 'calendar-events');
 
-        $this->loadViewsFrom(__DIR__ . '/../resources/views/', 'calendar-events');
-
         $this->publishes(
             [
                 __DIR__ . '/../database/migrations/' => database_path('migrations/'),
-                __DIR__ . '/../config/' => config_path('calendar-events/'),
+                __DIR__ . '/../config/calendar_events.php' => config_path('calendar_events.php'),
                 __DIR__ . '/../resources/lang/' => base_path('resources/lang/'),
                 __DIR__ . '/../resources/views/' => base_path('resources/vendor/calendar-events/'),
                 __DIR__ . '/../public/js/' => public_path('/js/'),
@@ -54,11 +51,6 @@ class CalendarEventsServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->mergeConfigFrom(
-            __DIR__ . '/../config/config.php',
-            'calendar-events'
-        );
-
         $this->app->bind(
             'calendar_events_engine',
             function () {
