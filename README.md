@@ -3,7 +3,7 @@
 Laravel 5 module to integrate a [fullcalendar](http://fullcalendar.io/) javascript plugin. It provides simple way to store events in the database and supports event repeat.
 
 # Installation
-Use the standart way ```composer require todstoychev/calendar-events```.
+Use the standard way ```composer require todstoychev/calendar-events```.
 
 Register the service provider at your Laravel ```config/app.php```. You should add ```Todstoychev\CalendarEvents\CalendarEventsServiceProvider::class```.
 
@@ -75,6 +75,7 @@ This one should be used with fullcalendar like this:
 ```html
 <div id="calendar"></div>
 <script src="{{ asset('jquery.js') }}"></script>
+<script src="{{ asset('js/calendar-events.js') }}"></script> <!-- This is where the CalendarEvents object comes from. -->
 <script src="{{ asset('fullcalendar/lib/moment.min.js') }}"></script>
 <script src="{{ asset('fullcalendar/fullcalendar.min.js') }}"></script>
 <script>
@@ -90,6 +91,7 @@ This one should be used with fullcalendar like this:
     });
 </script>
 ```
+Do not forget that you will need to include fullcalendar plugin in your project.
 
 # TODO
 - Add more PHPUnit test to achieve maximum coverage.
