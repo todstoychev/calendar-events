@@ -2,7 +2,7 @@
 
 namespace Todstoychev\CalendarEvents\Http\Requests;
 
-use App\Http\Requests\Request;
+use Illuminate\Foundation\Http\FormRequest;
 
 /**
  * Calendar events form request
@@ -10,7 +10,7 @@ use App\Http\Requests\Request;
  * @package Todstoychev\CalendarEvents\Http\Requests
  * @author Todor Todorov <todstoychev@gmail.com>
  */
-class CalendarEventRequest extends Request
+class CalendarEventRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
