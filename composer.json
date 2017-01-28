@@ -11,8 +11,9 @@
     "license": "MIT",
     "require": {
         "php": ">=5.5.9",
-        "laravel/framework": "~5.0",
-        "todstoychev/websafe-colors": "^0.1.1"
+        "todstoychev/websafe-colors": "^0.1.1",
+        "nesbot/carbon": "^1.22",
+        "illuminate/support": "^5.4"
     },
     "require-dev": {
         "phpunit/phpunit": "4.8.24"
