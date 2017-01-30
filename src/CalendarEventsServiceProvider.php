@@ -29,7 +29,7 @@ class CalendarEventsServiceProvider extends ServiceProvider
             [
                 __DIR__ . '/../database/migrations' => database_path('migrations'),
                 __DIR__ . '/../config/calendar_events.php' => config_path('calendar_events.php'),
-                __DIR__ . '/../resources/lang' => resource_path('lang'),
+                __DIR__ . '/../resources/lang' => base_path('resources/lang'),
                 __DIR__ . '/../resources/views' => base_path('resources/vendor/calendar-events'),
                 __DIR__ . '/../public/js' => public_path('/js'),
             ]
