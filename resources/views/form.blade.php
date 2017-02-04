@@ -137,7 +137,7 @@
                         @lang('calendar_events::calendar_events.use_event_location')
                     </label>
                     <div id="event-location">
-                        @include('calendar_events::event_location')
+                        @include('calendar-events::event_location')
                     </div>
                 @endif
 
