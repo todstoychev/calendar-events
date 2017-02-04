@@ -132,6 +132,7 @@
                 @if (config('calendar_events.use_event_location'))
                     <label for="use-event-location">
                         <input type="checkbox"
+                               name="use_event_location"
                                @if(isset($calendarEvent) && !empty($calendarEvent->eventLocation))checked="checked"@endif>
                         @lang('calendar_events::calendar_events.use_event_location')
                     </label>
