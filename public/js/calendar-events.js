@@ -5,6 +5,7 @@ var CalendarEvents = {
     init: function () {
         this.allDayToggle();
         this.repeatEventToggle();
+        this.eventLocationToggle();
     },
 
     /**
@@ -37,6 +38,14 @@ var CalendarEvents = {
     addRepeatDateField: function () {
         var field = $('button#add-repeat-date-field').siblings('div.repeat-date-field').first().html();
         $('button#add-repeat-date-field').before('<div class="repeat-date-field">' + field + '</div>');
+    },
+
+    eventLocationToggle: function () {
+        if ($('input[name=use_event_location]').prop('checked')) {
+            $('div#event-location').show();
+        } else {
+            $('div#event-location').hide();
+        }
     }
 }
 

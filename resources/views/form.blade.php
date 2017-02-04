@@ -133,7 +133,9 @@
                     <label for="use-event-location">
                         <input type="checkbox"
                                name="use_event_location"
-                               @if(isset($calendarEvent) && !empty($calendarEvent->eventLocation))checked="checked"@endif>
+                               @if(isset($calendarEvent) && !empty($calendarEvent->eventLocation))checked="checked"@endif
+                                onchange="CalendarEvents.eventLocationToggle()"
+                        >
                         @lang('calendar-events::calendar-events.use_event_location')
                     </label>
                     <div id="event-location">
