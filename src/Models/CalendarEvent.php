@@ -40,4 +40,12 @@ class CalendarEvent extends Model
     {
         return $this->hasMany(CalendarEventRepeatDate::class);
     }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function eventLocation()
+    {
+        return $this->hasOne(EventLocation::class, 'calendar_event_id', 'id');
+    }
 }
