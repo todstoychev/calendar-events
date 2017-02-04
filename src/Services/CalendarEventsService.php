@@ -111,13 +111,7 @@ class CalendarEventsService
         $eventDates = $this->calendarEventsEngine->buildEventDates($data);
         $cache = $this->cache;
         $calendarEvent = $this->calendarEvent->create($eventData);
-        $eventLocation = $this->handleEventLocation($data);
-
-        if (!empty($eventLocation)) {
-            $eventLocation->calendarEvent()
-                          ->associate($calendarEvent)
-            ;
-        }
+        $this->handleEventLocation($data, $calendarEvent);
 
         foreach ($eventDates as $date) {
             $calendarEventRepeatDate = clone $this->calendarEventRepeatDate;
@@ -266,13 +260,7 @@ class CalendarEventsService
             ->where('id', $id)
             ->firstOrFail()
         ;
-        $eventLocation = $this->handleEventLocation($data);
-
-        if (!empty($eventLocation)) {
-            $calendarEvent->eventLocation()
-                          ->associate($eventLocation)
-            ;
-        }
+        $this->handleEventLocation($data, $calendarEvent);
 
         foreach ($eventDates as $date) {
             $calendarEventRepeatDate = clone $this->calendarEventRepeatDate;
@@ -298,9 +286,11 @@ class CalendarEventsService
      *
      * @param array $data
      *
+     * @param \Todstoychev\CalendarEvents\Models\CalendarEvent $calendarEvent
+     *
      * @return null|\Todstoychev\CalendarEvents\Models\EventLocation
      */
-    protected function handleEventLocation(array $data)
+    protected function handleEventLocation(array $data, Models\CalendarEvent $calendarEvent)
     {
         if (array_key_exists('longitude', $data) && !empty($data['longitude'])) {
             $this->eventLocation->longitude = $data['longitude'];
@@ -318,6 +308,9 @@ class CalendarEventsService
             (!empty($this->eventLocation->longitude) && !empty($this->eventLocation->latitude)) ||
             !empty($this->eventLocation->address)
         ) {
+            $this->eventLocation->calendarEvent()
+                                ->associate($calendarEvent)
+            ;
             $this->eventLocation->save();
 
             return $this->eventLocation;
