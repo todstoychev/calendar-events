@@ -6,6 +6,7 @@
        placeholder="@lang('calendar-events::calendar-events.longitude')"
        value="{{ (isset($calendarEvent) && !empty($calendarEvent->eventLocation->longitude)) ? $calendarEvent->eventLocation->longitude : null}}"
 />
+<br />
 
 {{-- Latitude --}}
 <label for="latitude">@lang('calendar-events::calendar-events.latitude')</label>
@@ -15,6 +16,7 @@
        placeholder="@lang('calendar-events::calendar-events.latitude')"
        value="{{ (isset($calendarEvent) && !empty($calendarEvent->eventLocation->latitude)) ? $calendarEvent->eventLocation->latitude : null}}"
 />
+<br />
 
 {{-- Address --}}
 <label for="address">@lang('calendar-events::calendar-events.address')</label>
@@ -24,4 +26,5 @@
        placeholder="@lang('calendar-events::calendar-events.address')"
        value="{{ (isset($calendarEvent) && !empty($calendarEvent->eventLocation->address)) ? $calendarEvent->eventLocation->address : null}}"
 />
+<br />
 

@@ -24,4 +24,5 @@ return [
     'longitude' => 'Longitude',
     'latitude' => 'Latitude',
     'address' => 'Address',
+    'use_event_location' => 'Add event location'
 ];

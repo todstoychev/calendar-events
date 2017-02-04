@@ -41,7 +41,7 @@ var CalendarEvents = {
     },
 
     eventLocationToggle: function () {
-        if ($('input[name=use_event_location]').prop('checked')) {
+        if ($('#use-event-location').prop('checked')) {
             $('div#event-location').show();
         } else {
             $('div#event-location').hide();
