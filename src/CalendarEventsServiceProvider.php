@@ -25,7 +25,6 @@ class CalendarEventsServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->loadViewsFrom(__DIR__. '/../resources/views', 'calendar-events');
         $this->publishes(
             [
                 __DIR__ . '/../database/migrations' => database_path('/migrations'),
@@ -43,6 +42,7 @@ class CalendarEventsServiceProvider extends ServiceProvider
         );
 
         $this->loadTranslationsFrom(__DIR__ . '/../resources/lang/', 'calendar-events');
+        $this->loadViewsFrom(__DIR__. '/../resources/views/', 'calendar-events');
     }
 
     /**
