@@ -7,6 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * Class EventLocation
  *
+ * @property string $longitude
+ * @property string $latitude
+ * @property string $address
+ *
  * @package App
  * @author Todor Todorov <todstoychev@gmail.com>
  */
