@@ -50,6 +50,8 @@ var CalendarEvents = {
 }
 
 $(document).ready(function () {
+    CalendarEvents.init();
+
     $(document).on('click', 'button.remove-field', function () {
         if ($('button.remove-field').length > 1) {
             $(this).parent().remove();
