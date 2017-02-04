@@ -19,7 +19,7 @@ class EventLocation extends Model
     /**
      * @var string
      */
-    protected $table = 'events_locations';
+    protected $table = 'event_locations';
 
     /**
      * @var array
