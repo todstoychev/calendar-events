@@ -9,7 +9,7 @@ Register the service provider at your Laravel ```config/app.php```. You should a
 
 Run ```php artisan vendor:publish``` to publish config and other assets.
 
-This module provides also 2 migration files. It will be necessary to run them ```php artisan migrate```.
+This module provides also 3 migration files. It will be necessary to run them ```php artisan migrate```.
 
 # Usage
 

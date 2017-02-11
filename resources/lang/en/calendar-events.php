@@ -20,5 +20,9 @@ return [
     'add_date' => 'Add date',
     'time' => 'Time',
     'save' => 'Save',
-    'remove_field' => 'Remove field'
+    'remove_field' => 'Remove field',
+    'longitude' => 'Longitude',
+    'latitude' => 'Latitude',
+    'address' => 'Address',
+    'use_event_location' => 'Add event location'
 ];
