@@ -5,6 +5,7 @@ namespace Todstoychev\CalendarEvents\Services;
 use Illuminate\Support\Facades\Cache;
 use Todstoychev\CalendarEvents\Engine\CalendarEventsEngine;
 use Todstoychev\CalendarEvents\Models;
+use Todstoychev\CalendarEvents\Models\EventLocation;
 
 /**
  * Calendar events service
@@ -55,11 +56,17 @@ class CalendarEventsService
     protected $cacheTimeToLive;
 
     /**
+     * @var Models\EventLocation
+     */
+    protected $eventLocation;
+
+    /**
      * CalendarEventsService constructor.
      *
      * @param CalendarEventsEngine $calendarEventsEngine
      * @param Models\CalendarEvent $calendarEvent
      * @param Models\CalendarEventRepeatDate $calendarEventRepeatDate
+     * @param Models\EventLocation $eventLocation
      * @param Cache $cache
      * @param int $cacheTimeToLive
      */
@@ -67,12 +74,14 @@ class CalendarEventsService
         CalendarEventsEngine $calendarEventsEngine,
         Models\CalendarEvent $calendarEvent,
         Models\CalendarEventRepeatDate $calendarEventRepeatDate,
+        EventLocation $eventLocation,
         Cache $cache,
         $cacheTimeToLive = 10
     ) {
         $this->calendarEventsEngine = $calendarEventsEngine;
         $this->calendarEvent = $calendarEvent;
         $this->calendarEventRepeatDate = $calendarEventRepeatDate;
+        $this->eventLocation = $eventLocation;
         $this->cache = $cache;
         $this->cacheTimeToLive = $cacheTimeToLive;
     }
@@ -102,17 +111,20 @@ class CalendarEventsService
         $eventDates = $this->calendarEventsEngine->buildEventDates($data);
         $cache = $this->cache;
         $calendarEvent = $this->calendarEvent->create($eventData);
+        $this->handleEventLocation($data, $calendarEvent);
 
         foreach ($eventDates as $date) {
             $calendarEventRepeatDate = clone $this->calendarEventRepeatDate;
             $calendarEventRepeatDate->start = $date['start'];
             $calendarEventRepeatDate->end = $date['end'];
-            $calendarEventRepeatDate->calendarEvent()->associate($calendarEvent);
+            $calendarEventRepeatDate->calendarEvent()
+                                    ->associate($calendarEvent)
+            ;
             $calendarEventRepeatDate->save();
             unset($calendarEventRepeatDate);
         }
 
-        $cache::put(self::CACHE_KEY . $calendarEvent->id, $calendarEvent, $this->cacheTimeToLive);
+        $cache::put(self::CACHE_KEY.$calendarEvent->id, $calendarEvent, $this->cacheTimeToLive);
         $allEvents = $this->getAllEvents();
         $allEvents[$calendarEvent->id] = $calendarEvent;
         $cache::put(self::ALL_EVENTS_KEY, $allEvents, $this->cacheTimeToLive);
@@ -134,16 +146,17 @@ class CalendarEventsService
 
         $cache = $this->cache;
 
-        if ($cache::has(self::CACHE_KEY . $id)) {
-            return $cache::get(self::CACHE_KEY . $id);
+        if ($cache::has(self::CACHE_KEY.$id)) {
+            return $cache::get(self::CACHE_KEY.$id);
         }
 
         $calendarEvent = $this->calendarEvent
             ->with('calendarEventRepeatDates')
             ->where('id', $id)
-            ->firstOrFail();
+            ->firstOrFail()
+        ;
 
-        $cache::put(self::CACHE_KEY . $id, $calendarEvent, $this->cacheTimeToLive);
+        $cache::put(self::CACHE_KEY.$id, $calendarEvent, $this->cacheTimeToLive);
 
         return $calendarEvent;
     }
@@ -164,7 +177,8 @@ class CalendarEventsService
 
         $allEvents = $this->calendarEvent
             ->with('calendarEventRepeatDates')
-            ->get();
+            ->get()
+        ;
 
         $calendarEvents = [];
 
@@ -234,28 +248,74 @@ class CalendarEventsService
         $calendarEventRepeatDate = clone $this->calendarEventRepeatDate;
         $calendarEventRepeatDate
             ->where('calendar_event_id', $id)
-            ->delete();
+            ->delete()
+        ;
         $this->calendarEvent
             ->where('id', $id)
-            ->update($eventData);
+            ->update($eventData)
+        ;
+
+        // This is necessary due to in some Laravel 5.1 versions there is no model hydration after update
         $calendarEvent = $this->calendarEvent
             ->where('id', $id)
-            ->firstOrFail();
+            ->firstOrFail()
+        ;
+        $this->handleEventLocation($data, $calendarEvent);
 
         foreach ($eventDates as $date) {
             $calendarEventRepeatDate = clone $this->calendarEventRepeatDate;
             $calendarEventRepeatDate->start = $date['start'];
             $calendarEventRepeatDate->end = $date['end'];
-            $calendarEventRepeatDate->calendarEvent()->associate($calendarEvent);
+            $calendarEventRepeatDate->calendarEvent()
+                                    ->associate($calendarEvent)
+            ;
             $calendarEventRepeatDate->save();
             unset($calendarEventRepeatDate);
         }
 
-        $cache::put(self::CACHE_KEY . $calendarEvent->id, $calendarEvent, $this->cacheTimeToLive);
+        $cache::put(self::CACHE_KEY.$calendarEvent->id, $calendarEvent, $this->cacheTimeToLive);
         $allEvents = $this->getAllEvents();
         $allEvents->put($calendarEvent->id, $calendarEvent);
         $cache::put(self::ALL_EVENTS_KEY, $allEvents, $this->cacheTimeToLive);
 
         return true;
+    }
+
+    /**
+     * Handles EventLocation save/update
+     *
+     * @param array $data
+     *
+     * @param \Todstoychev\CalendarEvents\Models\CalendarEvent $calendarEvent
+     *
+     * @return null|\Todstoychev\CalendarEvents\Models\EventLocation
+     */
+    protected function handleEventLocation(array $data, Models\CalendarEvent $calendarEvent)
+    {
+        if (array_key_exists('longitude', $data) && !empty($data['longitude'])) {
+            $this->eventLocation->longitude = $data['longitude'];
+        }
+
+        if (array_key_exists('latitude', $data) && !empty($data['latitude'])) {
+            $this->eventLocation->latitude = $data['latitude'];
+        }
+
+        if (array_key_exists('address', $data) && !empty($data['address'])) {
+            $this->eventLocation->address = $data['address'];
+        }
+
+        if (
+            (!empty($this->eventLocation->longitude) && !empty($this->eventLocation->latitude)) ||
+            !empty($this->eventLocation->address)
+        ) {
+            $this->eventLocation->calendarEvent()
+                                ->associate($calendarEvent)
+            ;
+            $this->eventLocation->save();
+
+            return $this->eventLocation;
+        }
+
+        return null;
     }
 }

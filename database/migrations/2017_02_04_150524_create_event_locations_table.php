@@ -4,7 +4,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCalendarEventsRepeatDatesTable extends Migration
+class CreateEventLocationsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,20 +14,28 @@ class CreateCalendarEventsRepeatDatesTable extends Migration
     public function up()
     {
         Schema::create(
-            'calendar_events_repeat_dates',
+            'event_locations',
             function (Blueprint $table) {
                 $table->increments('id');
-                $table->dateTime('start');
-                $table->dateTime('end')
+                $table->string('longitude')
+                      ->nullable()
+                ;
+                $table->string('latitude')
+                      ->nullable()
+                ;
+                $table->string('address')
                       ->nullable()
                 ;
                 $table->integer('calendar_event_id')
                       ->unsigned()
                 ;
+                $table->timestamps();
+
                 $table->foreign('calendar_event_id')
                       ->references('id')
                       ->on('calendar_events')
                       ->onDelete('cascade')
+                      ->onUpdate('cascade')
                 ;
             }
         );
@@ -40,6 +48,6 @@ class CreateCalendarEventsRepeatDatesTable extends Migration
      */
     public function down()
     {
-        Schema::drop('calendar_events_repeat_dates');
+        Schema::drop('event_locations');
     }
 }

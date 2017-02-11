@@ -48,6 +48,17 @@ class CalendarEventRequest extends FormRequest
             $rules['repeat_dates'] = 'dates_array';
         }
 
+        if (!empty($this->input('use_event_location'))) {
+            if (empty($this->input('address')) || (empty($this->input('longitude')) || empty($this->input('latitude')))) {
+                $rules['longitude'] = 'required';
+                $rules['latitude'] = 'required';
+            }
+
+            if (empty($this->input('longitude')) && empty($this->input('latitude'))) {
+                $rules['address'] = 'required';
+             }
+        }
+
         return $rules;
     }
 }

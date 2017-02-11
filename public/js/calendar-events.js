@@ -5,6 +5,8 @@ var CalendarEvents = {
     init: function () {
         this.allDayToggle();
         this.repeatEventToggle();
+        this.eventLocationToggle();
+        this.removeField();
     },
 
     /**
@@ -37,13 +39,27 @@ var CalendarEvents = {
     addRepeatDateField: function () {
         var field = $('button#add-repeat-date-field').siblings('div.repeat-date-field').first().html();
         $('button#add-repeat-date-field').before('<div class="repeat-date-field">' + field + '</div>');
+    },
+
+    /**
+     * Toggles event location form
+     */
+    eventLocationToggle: function () {
+        if ($('#use-event-location').prop('checked')) {
+            $('div#event-location').show();
+        } else {
+            $('div#event-location').hide();
+        }
+    },
+
+    /**
+     * Acts on remove field
+     */
+    removeField: function () {
+        $(document).on('click', 'button.remove-field', function () {
+            if ($('button.remove-field').length > 1) {
+                $(this).parent().remove();
+            }
+        });
     }
 }
-
-$(document).ready(function () {
-    $(document).on('click', 'button.remove-field', function () {
-        if ($('button.remove-field').length > 1) {
-            $(this).parent().remove();
-        }
-    });
-});
