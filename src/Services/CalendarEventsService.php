@@ -151,7 +151,7 @@ class CalendarEventsService
         }
 
         $calendarEvent = $this->calendarEvent
-            ->with('calendarEventRepeatDates')
+            ->with(['calendarEventRepeatDates'])
             ->where('id', $id)
             ->firstOrFail()
         ;
@@ -166,7 +166,7 @@ class CalendarEventsService
      *
      * @return \Illuminate\Database\Eloquent\Collection|null|static[]
      */
-    public function getAllEvents()
+    public function getAllEvents(): array
     {
         $calendarEvents = null;
         $cache = $this->cache;
@@ -176,15 +176,12 @@ class CalendarEventsService
         }
 
         $allEvents = $this->calendarEvent
-            ->with('calendarEventRepeatDates')
+            ->with(['calendarEventRepeatDates'])
             ->get()
         ;
-
-        $calendarEvents = [];
-
-        foreach ($allEvents as $event) {
-            $calendarEvents[$event->id] = $event;
-        }
+        $calendarEvents = $allEvents->keyBy('id')
+                                    ->toArray()
+        ;
 
         $cache::put(self::ALL_EVENTS_KEY, $calendarEvents, $this->cacheTimeToLive);
 
@@ -204,7 +201,8 @@ class CalendarEventsService
             return $cache::get(self::ALL_EVENTS_TO_JSON_KEY);
         }
 
-        $allEvents = $this->calendarEventsEngine->formatEventsToJson($this->getAllEvents());
+        $allEvents = $this->calendarEventsEngine
+            ->formatEventsToJson($this->getAllEvents());
         $allEventsToJson = json_encode($allEvents);
         $cache::put(self::ALL_EVENTS_TO_JSON_KEY, $allEventsToJson, $this->cacheTimeToLive);
 

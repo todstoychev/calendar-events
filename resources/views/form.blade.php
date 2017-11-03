@@ -1,10 +1,10 @@
 @if(isset($calendarEvent))
-    <form action="{{ $action }}" method="POST">
+    <form action="{{ isset($action) ? $action : null }}" method="POST">
         <input type="hidden" name="_method" value="PUT"/>
         @else
-            <form action="{{ $action }}" method="POST">
+            <form action="{{ isset($action) ? $action : null }}" method="POST">
                 @endif
-                <input type="hidden" name="_token" value="{{ csrf_token() }}"/>
+                {{ csrf_field() }}
 
                 {{-- Title field --}}
                 <label for="title">*{!! trans('calendar-events::calendar-events.title') !!}</label>

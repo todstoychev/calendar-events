@@ -39,22 +39,22 @@ class CalendarEventRequest extends FormRequest
             'text_color' => 'sometimes|regex:/#([a-fA-F\d]){6}/',
         ];
 
-        if (empty($this->input('all_day'))) {
+        if (empty($this->get('all_day'))) {
             $rules['end.date'] = 'required|date';
             $rules['end.time'] = 'required|time';
         }
 
-        if (!empty($this->input('repeat'))) {
+        if (!empty($this->get('repeat'))) {
             $rules['repeat_dates'] = 'dates_array';
         }
 
-        if (!empty($this->input('use_event_location'))) {
-            if (empty($this->input('address')) || (empty($this->input('longitude')) || empty($this->input('latitude')))) {
+        if (!empty($this->get('use_event_location'))) {
+            if (empty($this->get('address')) || (empty($this->get('longitude')) || empty($this->get('latitude')))) {
                 $rules['longitude'] = 'required';
                 $rules['latitude'] = 'required';
             }
 
-            if (empty($this->input('longitude')) && empty($this->input('latitude'))) {
+            if (empty($this->get('longitude')) && empty($this->get('latitude'))) {
                 $rules['address'] = 'required';
              }
         }
