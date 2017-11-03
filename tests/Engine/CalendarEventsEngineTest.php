@@ -1,16 +1,17 @@
 <?php
 
-namespace Todstoychev\CalendarEvents\Tests;
+namespace Todstoychev\CalendarEvents\Tests\Engine;
 
 use Carbon\Carbon;
+use PHPUnit\Framework\TestCase;
 use Todstoychev\CalendarEvents\Engine\CalendarEventsEngine;
-use Todstoychev\CalendarEvents\Models\CalendarEvent;
+use Todstoychev\CalendarEvents\Exceptions\DateDifferenceException;
 
 /**
  * @package Todstoychev\CalendarEvents\Tests
  * @author Todor Todorov <todstoychev@gmail.com>
  */
-class CalendarEventsEngineTest extends \PHPUnit_Framework_TestCase
+class CalendarEventsEngineTest extends TestCase
 {
     /**
      * @var CalendarEventsEngine
@@ -91,10 +92,7 @@ class CalendarEventsEngineTest extends \PHPUnit_Framework_TestCase
             'background_color' => '#ffffff'
         ];
 
-        static::setExpectedException(
-            'Todstoychev\CalendarEvents\Exceptions\DateDifferenceException',
-            'Start date bigger then end date!'
-        );
+        static::expectException(DateDifferenceException::class);
 
         $this->calendarEventsEngine->buildEventData($data);
     }
